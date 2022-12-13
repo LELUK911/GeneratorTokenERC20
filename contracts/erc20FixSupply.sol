@@ -11,5 +11,6 @@ contract Erc20FixSupply is ERC20 {
         address _recipient
     ) ERC20(_name, _ticker) {
         _mint(_recipient, _supply * 10**decimals());
+
     }
 }

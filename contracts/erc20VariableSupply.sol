@@ -13,6 +13,7 @@ contract Erc20VariableSupply is ERC20, ERC20Burnable, Ownable {
         address _recipient
     ) ERC20(_name, _ticker) {
         _mint(_recipient, _supply * 10**decimals());
+         super.transferOwnership(_recipient);
     }
 
     function mint(address to, uint256 amount) public onlyOwner {

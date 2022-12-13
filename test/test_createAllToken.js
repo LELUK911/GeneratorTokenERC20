@@ -1,7 +1,7 @@
 const truffleAssertions = require("truffle-assertions");
 const { assert } = require("chai");
-const CreateContract = artifacts.require("creatorToken");
-
+const CreateContract = artifacts.require("creatorTokenERC");
+console.clear();
 contract("preliminary Test", async (accounts) => {
   const account = accounts[0];
   const account2 = accounts[1];
@@ -18,7 +18,7 @@ contract("preliminary Test", async (accounts) => {
       ethBalance.toString() === balanceBefore.toString(),
       "balance not correspond"
     );
-
+    //
     const newToken = await createContract.createFixSupply(
       "FixSupply",
       "FXS",
@@ -26,13 +26,15 @@ contract("preliminary Test", async (accounts) => {
       account,
       { value: fees }
     );
-    console.log("address new token" + newToken.logs[0].address);
+    //console.log("address new token " + newToken.logs[0].address);
 
     ethBalance = await web3.eth.getBalance(createContract.address);
     const balance = await createContract.getBalance();
+    console.log(ethBalance);
+    console.log(balance.toString());
 
     assert(
-      ethBalance.toString() === balance.toString(),
+      ethBalance.toString() == balance.toString(),
       "balance not correspond"
     );
     assert(
@@ -64,10 +66,8 @@ contract("preliminary Test", async (accounts) => {
       ethBalance.toString() === balanceAfter.toString(),
       "balance not correspond"
     );
-
     assert(
       +balanceBefore.toString() + +fees === +balanceAfter,
-
       "Problem with update balance or deposit fees"
     );
   });
@@ -96,10 +96,8 @@ contract("preliminary Test", async (accounts) => {
       ethBalance.toString() === balanceAfter.toString(),
       "balance not correspond"
     );
-
     assert(
       +balanceBefore.toString() + +fees === +balanceAfter,
-
       "Problem with update balance or deposit fees"
     );
   });
@@ -131,7 +129,6 @@ contract("preliminary Test", async (accounts) => {
 
     assert(
       +balanceBefore.toString() + +fees === +balanceAfter,
-
       "Problem with update balance or deposit fees"
     );
   });
@@ -139,6 +136,8 @@ contract("preliminary Test", async (accounts) => {
     const createContract = await CreateContract.deployed();
     const balanceBefore = await createContract.getBalance();
     let ethBalance = await web3.eth.getBalance(createContract.address);
+    let ownerBalance = await web3.eth.getBalance(account);
+    console.log(ownerBalance);
     assert(
       ethBalance.toString() === balanceBefore.toString(),
       "balance not correspond"
@@ -147,6 +146,8 @@ contract("preliminary Test", async (accounts) => {
     await createContract.withdraw();
     const balanceAfter = await createContract.getBalance();
     ethBalance = await web3.eth.getBalance(createContract.address);
+    ownerBalance = await web3.eth.getBalance(account);
+    console.log(ownerBalance);
     assert(
       ethBalance.toString() === balanceAfter.toString(),
       "balance not correspond"
@@ -192,19 +193,19 @@ contract("preliminary Test", async (accounts) => {
       createContract.setFees("1000000", { from: account2 })
     );
   });
-  it("when in pause , function are in PAUSA!", async ()=>{
+  it("when in pause , function are in PAUSA!", async () => {
     const createContract = await CreateContract.deployed();
 
-    await createContract.setPause()
+    await createContract.setPause();
 
     truffleAssertions.reverts(
-        createContract.createFixSupplyPausable(
-            "FixSupplyPausable",
-            "FXS",
-            supply,
-            account,
-            { value: fees }
-          )
-    )
-  })
+      createContract.createFixSupplyPausable(
+        "FixSupplyPausable",
+        "FXS",
+        supply,
+        account,
+        { value: fees }
+      )
+    );
+  });
 });

@@ -13,6 +13,7 @@ contract Erc20FixSupplyPausable is ERC20, Pausable, Ownable {
         address _recipient
     ) ERC20(_name, _ticker) {
         _mint(_recipient, _supply * 10**decimals());
+         super.transferOwnership(_recipient);
     }
 
     function pause() public onlyOwner {
