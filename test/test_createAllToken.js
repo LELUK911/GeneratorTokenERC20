@@ -30,8 +30,8 @@ contract("preliminary Test", async (accounts) => {
 
     ethBalance = await web3.eth.getBalance(createContract.address);
     const balance = await createContract.getBalance();
-    console.log(ethBalance);
-    console.log(balance.toString());
+    //console.log(ethBalance);
+    //console.log(balance.toString());
 
     assert(
       ethBalance.toString() == balance.toString(),
@@ -58,7 +58,7 @@ contract("preliminary Test", async (accounts) => {
       account,
       { value: fees }
     );
-    console.log("address new token" + newToken.logs[0].address);
+    //console.log("address new token" + newToken.logs[0].address);
 
     const balanceAfter = await createContract.getBalance();
     ethBalance = await web3.eth.getBalance(createContract.address);
@@ -88,7 +88,7 @@ contract("preliminary Test", async (accounts) => {
       account,
       { value: fees }
     );
-    console.log("address new token" + newToken.logs[0].address);
+    //console.log("address new token" + newToken.logs[0].address);
 
     const balanceAfter = await createContract.getBalance();
     ethBalance = await web3.eth.getBalance(createContract.address);
@@ -118,7 +118,7 @@ contract("preliminary Test", async (accounts) => {
       account,
       { value: fees }
     );
-    console.log("address new token" + newToken.logs[0].address);
+    //console.log("address new token" + newToken.logs[0].address);
 
     const balanceAfter = await createContract.getBalance();
     ethBalance = await web3.eth.getBalance(createContract.address);
@@ -137,7 +137,7 @@ contract("preliminary Test", async (accounts) => {
     const balanceBefore = await createContract.getBalance();
     let ethBalance = await web3.eth.getBalance(createContract.address);
     let ownerBalance = await web3.eth.getBalance(account);
-    console.log(ownerBalance);
+    //console.log(ownerBalance);
     assert(
       ethBalance.toString() === balanceBefore.toString(),
       "balance not correspond"
@@ -147,7 +147,7 @@ contract("preliminary Test", async (accounts) => {
     const balanceAfter = await createContract.getBalance();
     ethBalance = await web3.eth.getBalance(createContract.address);
     ownerBalance = await web3.eth.getBalance(account);
-    console.log(ownerBalance);
+    //console.log(ownerBalance);
     assert(
       ethBalance.toString() === balanceAfter.toString(),
       "balance not correspond"
