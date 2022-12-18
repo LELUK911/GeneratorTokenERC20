@@ -10228,10 +10228,16 @@
       "links": {},
       "address": "0xC3C7f682Db1ce0D1bd670CE14a1911E3924A07d4",
       "transactionHash": "0x90e36bf38ec71b9d308d2b9fc433bf199f938d138663a447ca6f56ebf1569258"
+    },
+    "80001": {
+      "events": {},
+      "links": {},
+      "address": "0x9736b99D5f27fBcfd8744735D33C3a245568abc7",
+      "transactionHash": "0xd3687cfc5a9b8c2fa89cae3e21a49bb23a5f8cbad7c80baf468abd6f347b93a9"
     }
   },
   "schemaVersion": "3.4.9",
-  "updatedAt": "2022-12-14T19:59:58.049Z",
+  "updatedAt": "2022-12-18T13:15:08.725Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

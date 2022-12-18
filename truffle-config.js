@@ -49,6 +49,8 @@ require('dotenv').config()
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const MNEMONIC = process.env.MNEMONIC
 const MY_API_KEY = process.env.ETHERSCA_API
+const MY_API_KEY_POLYSCAN = process.env.POLYSCAN_API
+
 
 module.exports = {
 
@@ -88,12 +90,20 @@ module.exports = {
     // Useful for deploying to a public network.
     // Note: It's important to wrap the provider as a function to ensure truffle uses a new provider every time.
      goerli: {
-       provider: () => new HDWalletProvider(MNEMONIC, `https://eth-goerli.g.alchemy.com/v2/psdxQHy-ox6KOAzgtKoodvawJ0lL7tHg`),
+       provider: () => new HDWalletProvider(MNEMONIC, process.env.HTTP_ALCHEMY_GOERLI),
        network_id: 5,       // Goerli's id
        confirmations: 2,    // # of confirmations to wait between deployments. (default: 0)
        timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
        skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
      },
+     mumbai: {
+      provider: () => new HDWalletProvider(MNEMONIC, process.env.HTTP_ALCHEMY_MUMBAI),
+      network_id: 80001,       // Goerli's id
+      confirmations: 2,    // # of confirmations to wait between deployments. (default: 0)
+      timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+      skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+    },
+
     //
     // Useful for private networks
     // private: {
@@ -105,7 +115,8 @@ module.exports = {
     'truffle-plugin-verify'
   ],
   api_keys: {
-    etherscan: MY_API_KEY
+    etherscan: MY_API_KEY,
+    polygonscan: MY_API_KEY_POLYSCAN
   },
 
   // Set default mocha options here, use special reporters, etc.
